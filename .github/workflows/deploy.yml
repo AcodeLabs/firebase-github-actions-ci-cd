@@ -19,12 +19,10 @@ jobs:
       - name: Install Firebase CLI
         run: npm install -g firebase-tools
 
-      - name: Set up credentials
-        run: |
-          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}" > $HOME/gcloud-service-key.json
-          export GOOGLE_APPLICATION_CREDENTIALS="$HOME/gcloud-service-key.json"
+      - name: Authenticate to Firebase
+        run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}" > $HOME/gcloud-service-key.json
 
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting
+        run: firebase deploy --only hosting --project_id $PROJECT_ID --token "$(firebase login:ci --no-localhost --credential ${HOME}/gcloud-service-key.json)"
         env:
           PROJECT_ID: uihub-35377
