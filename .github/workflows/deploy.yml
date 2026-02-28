@@ -23,6 +23,6 @@ jobs:
         run: echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOKEN }}" > $HOME/gcloud-service-key.json
 
       - name: Deploy to Firebase
-        run: firebase deploy --only hosting --project_id $PROJECT_ID --token "$(firebase login:ci --no-localhost --credential ${HOME}/gcloud-service-key.json)"
+        run: firebase deploy --only hosting --project $PROJECT_ID --token "$(firebase login:ci --no-localhost --credential ${HOME}/gcloud-service-key.json)"
         env:
           PROJECT_ID: uihub-35377
