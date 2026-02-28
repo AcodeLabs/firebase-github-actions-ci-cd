@@ -27,4 +27,4 @@ jobs:
       - name: Deploy to Firebase
         run: firebase deploy --only hosting
         env:
-          PROJECT_ID: your-firebase-project-id
+          PROJECT_ID: uihub-35377
